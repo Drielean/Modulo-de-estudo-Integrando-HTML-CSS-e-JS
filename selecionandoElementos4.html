@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #04</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+
+<body class="conteudo exercicio">
+    <div>
+        <p>Início</p>
+    </div>
+    <div>
+        <ul>
+            <li>Pedro</li>
+            <li>Ana</li>
+            <li>Bia</li>
+        </ul>
+    </div>
+    <div>
+        <p>Fim</p>
+    </div>
+    <script>
+        // ...
+        function log() {
+            console.log(this)
+        }
+
+        HTMLCollection.prototype.log = log
+        HTMLElement.prototype.log = log
+        NodeList.prototype.log = log
+        Node.prototype.log = log
+        // o .log so esta sendo utilizdo a baixo em todos devido a funcao feita acima.
+        //a partir de determinado elemento vc consegue acessar o pai do elemento.
+        const lista = document.querySelector('div ul')
+        lista.parentNode.log()
+        lista.childNodes.log() //usando o childNodes tem alguns efeitos colaterais com os espacos entre as li, ai 'e necessario retirar os espacos.
+
+        //usa o primeiro elemento como referencia
+        const primeiro = lista.firstChild
+        primeiro.log()
+        primeiro.nextSibling.log()
+
+        //usa o ultimo elemento como referencia
+        const ultimo = lista.lastChild
+        ultimo.log()
+        ultimo.previousSibling.log()
+
+        
+        lista.children.log()
+        lista.firstElementChild.log()
+        //aqui vc consegue misturar as listas
+        lista.parentNode.previousElementSibling.log()
+        lista.parentNode.nextElementSibling.log()
+
+        //lembando que para uma maior facilidade vc pegar direto o que deseja e nao ficar passando por varios locais.
+        document.querySelectorAll('div ul li').log()
+    </script>
+</body>
+
+</html>

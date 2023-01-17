@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #01</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body class="conteudo exercicio">
+    <div id="primeiro">#primeiro</div>
+    <div>Segundo</div>
+    <div class="terceiro ultimo">.terceiro .ultimo</div>
+    <script>      
+        //aqui estou passando o ID e adcionando a class em destaque, para ver o elemento que desejo selecionado        
+        document.getElementById('primeiro').classList.add('destaque')
+
+        //todos os elemento com a tag div seram selecionados a partir desse metodo 
+        const divs = document.getElementsByTagName('div')
+        
+        //pego todos os elementos, percoro por eles e removo a class solicitada
+        Array.from(divs).forEach(e => e.classList.remove('destaque'))
+
+        //outra forma de tornar um HTML em array
+        //... espalha todos elementos
+        //aqui eu percoro todos os elementos e adciono a class destaque em todos.
+        const divsArray = [...divs]
+        divsArray.forEach(e => e.classList.add('destaque'))
+
+        //nesta opcao vc nao transforma em array
+        //usando a funcao para acessar os elementos a partir da class, ai recebemos uma lista como resposta
+        //por ele ser um intereitor vc consegue fazer um for nele
+        const ultimosElementos = document.getElementsByClassName('ultimo')
+        for(let e of ultimosElementos) {
+            e.classList.remove('destaque')
+        }
+    </script>
+</body>
+</html>

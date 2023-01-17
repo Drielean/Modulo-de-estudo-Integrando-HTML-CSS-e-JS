@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #01</title>
+    <link rel='stylesheet' href='css/estilo.css'>
+</head>
+
+<body class="conteudo exercicio">
+    <div>
+        <!-- onclick="navegarEm5s(event)" -->
+        <a espera-um-pouco href="https://google.com.br">Google</a>
+    </div>
+    <script>
+        // ...qual o maior padrao de projetos utilizados na web 'e o 'observer'
+        function navegarEm5s(e) {
+            e.preventDefault() //com isso vc previne o evento
+            console.log('Saindo em 5s...')
+            setTimeout(() => {
+                const link = e.target
+                window.location.href = link.href
+            }, 5000)
+        }
+
+        //resolve o problema, mais fica muito implicito o que esta sendo feito
+        //const a = document.querySelector('a')
+        //a.onclick =navegarEm5s
+
+        //aqui 'e a melhor opcao, pois aqui vc tem um atributo personalizado e deixa claro que vc vai usar um codigo e tratar
+        const a = document.querySelector('[espera-um-pouco]')
+        a.onclick = navegarEm5s
+    </script>
+</body>

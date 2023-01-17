@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Selecionar Elementos #02</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body class="conteudo exercicio">
+    <div id="primeiro">#primeiro</div>
+    <div>Segundo</div>
+    <div class="terceiro ultimo"><span wb-attrib>.terceiro .ultimo</span></div>
+    <script>              
+        // essas funcoes lembra muito nao de forma mais profunda, mais lembra como vc seleciona elementos dentro do GQuery
+        //aqui seleciona um elemento a partir de um ID
+        document.querySelector('#primeiro').classList.add('destaque')
+        //criamos duas funcoes para fazer o selecionar e deselecionar, para percorrer todos os elementos vc nao precisa converter, porem em alguns casos sera necessario.
+        const selecionar = seletor =>
+            document.querySelectorAll(seletor).forEach(e => e.classList.add('destaque'))
+
+            const deselecionar = seletor =>
+            document.querySelectorAll(seletor).forEach(e => e.classList.remove('destaque'))    
+         
+        //selecionar todos que tem div e depois deselecionar todos com seletor universal.
+        selecionar('div')
+
+        deselecionar('*')
+        //  selecionar o elemento que tenha as duas class
+        selecionar('.terceiro.ultimo')
+
+        deselecionar('*')
+        //selecionar todos que nao 'e primeiro
+        selecionar(':not(#primeiro)')
+
+        deselecionar('*')
+        //selecionar o primeiro filho de um elemento
+        selecionar(':nth-child(1)')
+
+        deselecionar('*')
+        //selecionar um elemento de determinado tipo
+        selecionar('div:nth-of-type(1)')
+
+        deselecionar('*')
+        //selecionar pelo atributo
+        selecionar('[wb-attrib')
+
+
+        //tbm conseguimos transformar um nodeList em Array
+        //Array.from(document.querySelectorAll('div'))
+        //ou
+        //[...document.querySelectorAll('div')]
+    </script>
+</body>
+</html>

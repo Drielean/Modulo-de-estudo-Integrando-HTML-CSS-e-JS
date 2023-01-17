@@ -1,0 +1,74 @@
+</html>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <title>Trabalhando com Eventos #03</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+        }
+        
+        .esquerda {
+            height: 100vh;
+            width: 50%;
+            background-color: coral;
+        }
+        
+        .direita {
+            height: 100vh;
+            width: 50%;
+            background-color: cornflowerblue;
+        }
+        
+        .item {
+            border: solid 5px black;
+            background-color: darkgrey;
+            color: white;
+            height: 100px;
+            font-size: 40px;
+            margin: 10px;
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="esquerda" wm-dropzone>
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+    </div>
+    <div class="direita" wm-dropzone></div>
+    <script>
+        // ...como criar um evento chamado drag-and-drop (colocar um elemento de um lado para o outro)
+
+        //vc seleciona todos, depois percorrer os items, verificar se tem um id e se nao tiver ele adiciona, o draggable faz com que vc consiga movimentar o elemento,
+        // porem ele volta por lugar quando solta.
+        //quando vc arrasta o elemento, ele ja inicia o ondragstart e seta o item-id e o target.
+        const items = document.querySelectorAll('[wm-dropzone] .item')
+        items.forEach((item, index) => {
+            item.draggable = true
+            item.id = item.id || `draggable-item-${index}`
+            item.ondragstart = e =>
+            e.dataTransfer.setData('item-id', e.target.id)
+        })
+        //selecionar todos, percorrer o dropzone, pego ele no ondrop e o local onde eu estiver soltando ele, o elemento fica nesse local.
+        const dropzones = document.querySelectorAll('[wm-dropzone]')
+        dropzones.forEach(dropzone => {
+            dropzone.ondragover = e => e.preventDefault() //linha necessaria para a funcionalidade, 'e necessario dar um preventDefault para a funcionalidade da proxima etapa.
+            dropzone.ondrop = function(e) {
+                const id = e.dataTransfer.getData('item-id')
+                const item = document.getElementById(id)
+                // e.target.appendChild(item) // nesta linha vc consegue colocar um dentro do outro
+                dropzone.appendChild(item) //ja neste apenas coloca de um lado para o outro, porem nao um dentro do outro
+            }
+        })
+    </script>
+</body>
+
+</html>
